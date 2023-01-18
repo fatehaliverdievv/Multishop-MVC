@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+@model CreateProductVM
+<div class="col-md-6 grid-margin  stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Create Products</h4>
+                  <form class="forms-sample" method="post"  enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label asp-for="Name"></label>
+                      <input asp-for="Name" class="form-control">
+                      <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                     <div class="form-group">
+                      <label asp-for="Description"></label>
+                      <input asp-for="Description" class="form-control">
+                      <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                      <label asp-for="CostPrice"></label>
+                      <input asp-for="CostPrice" class="form-control">
+                      <span asp-validation-for="CostPrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                      <label asp-for="SellPrice"></label>
+                      <input asp-for="SellPrice" class="form-control">
+                      <span asp-validation-for="SellPrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                      <label asp-for="DiscountId">Discount</label>
+                    <select asp-for="DiscountId" asp-items="ViewBag.Discounts" ></select>
+                      <span asp-validation-for="DiscountId" class="text-danger"></span>
+                    </div>
+                     <div class="form-group">
+                      <label asp-for="CategoryId">Category</label>
+                    <select asp-for="CategoryId" asp-items="ViewBag.Categories"></select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                     <div class="form-group">
+                      <label asp-for="ColorIds">Colors</label>
+                      <select asp-for="ColorIds" asp-items="@ViewBag.Colors"></select>
+                      <span asp-validation-for="ColorIds" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                      <label asp-for="SizeIds">Sizes</label>
+                      <select asp-for="SizeIds" asp-items="@ViewBag.Sizes" ></select>
+                      <span asp-validation-for="SizeIds" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                    <label asp-for="ProductInformationId">ProductInformation</label>
+                    <select asp-for="ProductInformationId" asp-items="@ViewBag.ProductInformations"></select>
+                    <span asp-validation-for="ProductInformationId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CoverImg"></label>
+                    <input accept="image/*" asp-for="CoverImg" class="form-control">
+                    <span asp-validation-for="CoverImg" class="text-danger"></span>
+                </div>
+                    <div class="form-group">
+                    <label asp-for="Otherimages"></label>
+                    <input accept="image/*" asp-for="Otherimages" class="form-control">
+                    <span asp-validation-for="Otherimages" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Create</button>
+                    <button class="btn btn-light" asp-area="Manage" asp-controller="Product" asp-action="Index">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            

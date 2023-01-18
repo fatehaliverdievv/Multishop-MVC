@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Majestic admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/admin/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/admin/vendors/base/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="~/admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/admin/css/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="~/admin/images/favicon.png" />
+</head>
+<body>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Manage" asp-controller="Dashboard" asp-action="Index">
+                            <i class="mdi mdi-home menu-icon"></i>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#Addvertising" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                            <span class="menu-title">Addvertising</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="Addvertising">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Addvertising" asp-action="Index">List of Addvertisings</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Addvertising" asp-action="Create">Create Addvertisings</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#discount" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                            <span class="menu-title">Clients</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="discount">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Discount" asp-action="Index">List of Discounts</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Discount" asp-action="Create">Create Discount</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#information" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                            <span class="menu-title">ProductInformation</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="information">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="ProductInformation" asp-action="Index">List of ProductInformations</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="ProductInformation" asp-action="Create">Create ProductInformation</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#slider" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                            <span class="menu-title">Sliders</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="slider">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Slider" asp-action="Index">List of Sliders</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Slider" asp-action="Create">Create Sliders</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#category" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                            <span class="menu-title">Category</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="category">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Category" asp-action="Index">List of Categories</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Category" asp-action="Create">Create Categories</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#size" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                            <span class="menu-title">Sizes</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="size">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Size" asp-action="Index">List of Sizes</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Size" asp-action="Create">Create Sizes</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#color" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                            <span class="menu-title">Colors</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="color">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Color" asp-action="Index">List of Colors</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Color" asp-action="Create">Create Colors</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#product" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                            <span class="menu-title">Products</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="product">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Product" asp-action="Index">List of Products</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Product" asp-action="Create">Create Products</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#setting" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                            <span class="menu-title">Setting</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="setting">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Setting" asp-action="Index">List of Settings</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-area="Manage" asp-controller="Setting" asp-action="Create">Create Setting</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <!-- partial -->
+            <div class="main-panel">
+                @RenderBody()
+                </div>
+            </div>
+        </div>
+    <script src="~/admin/vendors/base/vendor.bundle.base.js"></script>
+    <script src="~/admin/vendors/chart.js/Chart.min.js"></script>
+    <script src="~/admin/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="~/admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script src="~/admin/js/off-canvas.js"></script>
+    <script src="~/admin/js/hoverable-collapse.js"></script>
+    <script src="~/admin/js/template.js"></script>
+    <script src="~/admin/js/dashboard.js"></script>
+    <script src="~/admin/js/data-table.js"></script>
+    <script src="~/admin/js/jquery.dataTables.js"></script>
+    <script src="~/admin/js/dataTables.bootstrap4.js"></script>
+    <script src="~/admin/js/jquery.cookie.js" type="text/javascript"></script>
+</body>
+</html>
+
