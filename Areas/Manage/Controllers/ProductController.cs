@@ -5,6 +5,7 @@ using Multishop.DAL;
 using Multishop.Models;
 using Multishop.Utilies;
 using Multishop.ViewModels;
+using System.Data;
 
 namespace Multishop.Areas.Manage.Controllers
 {
@@ -115,12 +116,98 @@ namespace Multishop.Areas.Manage.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult Update(int? id)
+        {
+            ViewBag.Categories = new SelectList(_context.Categories, nameof(Category.Id), nameof(Category.Name));
+            ViewBag.Discounts = new SelectList(_context.Discounts, nameof(Discount.Id), nameof(Discount.Name), nameof(Discount.DiscountPercent));
+            ViewBag.ProductInformations = new SelectList(_context.ProductInformations, nameof(ProductInformation.Id), nameof(ProductInformation.Name));
+            ViewBag.Sizes = new SelectList(_context.Sizes, nameof(Size.Id), nameof(Size.Name));
+            ViewBag.Colors = new SelectList(_context.Colors, nameof(Color.Id), nameof(Color.Name));
+            if (id == null || id == 0) return BadRequest();
+            var product = _context.Products.Include(p => p.ProductColors).Include(p => p.ProductSizes).Include(p => p.ProductImages).FirstOrDefault(x => x.Id == id);
+            if (product == null) return NotFound();
+            UpdateProductVM productVM = new UpdateProductVM();
+            productVM.Id = product.Id;
+            productVM.Description = product.Description;
+            productVM.Name = product.Name;
+            productVM.CategoryId = product.CategoryId;
+            productVM.DiscountId = product.DiscountId;
+            productVM.ProductInformationId = product.ProductInformationId;
+            productVM.CostPrice = product.CostPrice;
+            productVM.SellPrice = product.SellPrice;
+            productVM.SizeIds = product.ProductSizes.Select(x => x.SizeId).ToList();
+            productVM.ColorIds = product.ProductColors.Select(x => x.ColorId).ToList();
+            productVM.ProductImages = product.ProductImages;
+            return View(productVM);
+        }
+        [HttpPost]
         public IActionResult Update(int? id, UpdateProductVM productVM)
         {
-            if (id == null || id == 0) return BadRequest();
-            var product=_context.Products.FirstOrDefault(x => x.Id == id);
-            if (product == null) return NotFound();
-            product.Name= productVM.Name;
+            foreach (var item in (productVM.ColorIds ?? new List<int>()))
+            {
+                if (!_context.Colors.Any(c => c.Id == item)) ;
+            }
+            foreach (var item in (productVM.SizeIds ?? new List<int>()))
+            {
+                if (!_context.Sizes.Any(s => s.Id == item)) ;
+            }
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = new SelectList(_context.Categories, nameof(Category.Id), nameof(Category.Name));
+                ViewBag.Discounts = new SelectList(_context.Discounts, nameof(Discount.Id), nameof(Discount.Name), nameof(Discount.DiscountPercent));
+                ViewBag.ProductInformations = new SelectList(_context.ProductInformations, nameof(ProductInformation.Id), nameof(ProductInformation.Name));
+                ViewBag.Sizes = new SelectList(_context.Sizes, nameof(Size.Id), nameof(Size.Name));
+                ViewBag.Colors = new SelectList(_context.Colors, nameof(Color.Id), nameof(Color.Name));
+                return View();
+            }
+            if (id == null||id==0) return BadRequest();
+            var existedprod=_context.Products.Include(p => p.ProductColors).Include(p => p.ProductSizes).Include(p => p.ProductImages).FirstOrDefault(x => x.Id == id);
+            foreach (var item in existedprod.ProductColors)
+            {
+                if (productVM.ColorIds.Contains(item.ColorId))
+                {
+                    productVM.ColorIds.Remove(item.ColorId);
+                }
+                else
+                {
+                    _context.ProductColors.Remove(item);
+                }
+            }
+            foreach (var item in existedprod.ProductSizes)
+            {
+                if (productVM.SizeIds.Contains(item.SizeId))
+                {
+                    productVM.SizeIds.Remove(item.SizeId);
+                }
+                else
+                {
+                    _context.ProductSizes.Remove(item);
+                }
+            }
+            foreach (var item in (productVM.ColorIds ?? new List<int>()))
+            {
+                _context.ProductColors.Add(new ProductColor { ColorId = item, Product = existedprod });
+            }
+            foreach(var item in (productVM.SizeIds ?? new List<int>()))
+            {
+                _context.ProductSizes.Add(new ProductSize { SizeId=item, Product = existedprod });
+            }
+            foreach (var item in existedprod.ProductImages)
+            {
+                if (productVM.ImageIds.Contains(item.Id))
+                {
+                    _context.ProductImages.Remove(item);
+                }
+            }
+            existedprod.Name=productVM.Name;
+            existedprod.Description=productVM.Description;
+            existedprod.CostPrice=productVM.CostPrice;
+            existedprod.SellPrice=productVM.SellPrice;
+            existedprod.CategoryId=productVM.CategoryId;
+            existedprod.ProductInformationId=productVM.ProductInformationId;
+            existedprod.DiscountId=productVM.DiscountId;
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
     }
 

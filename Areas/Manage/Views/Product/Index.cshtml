@@ -21,7 +21,7 @@
             {
                 <tr>
                     <td>@item.Id</td>
-                    <td><img width="40" src="~/assets/images/product/@item?.ProductImages.FirstOrDefault(pi=>pi.IsCover==true)?.ImgUrl"></td>
+                    <td><img width="40" src="~/assets/img/@item?.ProductImages.FirstOrDefault(pi=>pi.IsCover==true)?.ImgUrl"></td>
                     <td>@item.Name</td>
                     <td>@item.Description</td>
                     <td>@item.CostPrice $</td>

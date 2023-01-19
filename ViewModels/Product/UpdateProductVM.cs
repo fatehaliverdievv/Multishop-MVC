@@ -17,11 +17,11 @@ namespace Multishop.ViewModels
         public int ProductInformationId { get; set; }
         public int DiscountId { get; set; }
         public int CategoryId { get; set; }
-        public Discount? Discount { get; set; }
-        public ProductInformation? ProductInformation { get; set; }
-        public ICollection<ProductColor> ProductColors { get; set; }
-        public ICollection<ProductSize> ProductSizes { get; set; }
-        public Category? Category { get; set; }
-        public ICollection<ProductImage>? ProductImages { get; set; }
+        public List<int>? ColorIds { get; set; }
+        public List<int>? SizeIds { get; set; }
+        public List<int>? ImageIds { get; set; }
+        public IFormFile? CoverImg { get; set; }
+        public List<IFormFile>? Otherimages { get; set; }
+        public ICollection<ProductImage>? ProductImages { get; set;}
     }
 }
